@@ -39,4 +39,14 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<BookDto> editBook(@PathVariable long id, @RequestBody @Valid BookDto bookDto) {
+        try {
+            BookDto editedBook = bookService.editBook(id, bookDto);
+            return ResponseEntity.ok(editedBook);
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
 }

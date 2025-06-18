@@ -16,5 +16,15 @@ Content-Type: application/json
   "type": "comedy"
 }
 ### PUT book
+PUT http://localhost:8080/books/6
+Content-Type: application/json
+
+{
+  "isbn": "111111",
+  "title": "My Interests",
+  "author": "programmer Danyil Fiut",
+  "publisher": "Nobody",
+  "type": "comedy"
+}
 
 ### DELETE book
