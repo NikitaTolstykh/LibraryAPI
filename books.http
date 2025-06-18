@@ -5,7 +5,16 @@ GET http://localhost:8080/books
 GET http://localhost:8080/books/2
 
 ### POST book
+POST http://localhost:8080/books
+Content-Type: application/json
 
+{
+ "isbn": "1241234",
+  "title": "My Interests",
+  "author": "programmer Nikita Tolstykh",
+  "publisher": "Nobody",
+  "type": "comedy"
+}
 ### PUT book
 
 ### DELETE book

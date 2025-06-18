@@ -2,11 +2,10 @@ package com.libraryAPI.com.libraryAPI.controller;
 
 import com.libraryAPI.com.libraryAPI.dto.BookDto;
 import com.libraryAPI.com.libraryAPI.service.BookService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +33,10 @@ public class BookController {
         }
     }
 
+    @PostMapping()
+    public ResponseEntity<BookDto> addBook(@RequestBody @Valid BookDto bookDto) {
+        BookDto savedBook = bookService.addBook(bookDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
+    }
 
 }
