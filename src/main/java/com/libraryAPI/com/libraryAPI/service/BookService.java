@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BookService {
+public class BookService implements LibraryService{
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
 
@@ -21,22 +21,26 @@ public class BookService {
         this.bookMapper = bookMapper;
     }
 
+    @Override
     public List<BookDto> getAllBooks() {
         return bookMapper.listBooksToDto(bookRepository.findAll());
     }
 
+    @Override
     public BookDto getBook(long id) {
         return bookMapper.bookToDto(bookRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Book not found"))
         );
     }
 
+    @Override
     @Transactional
     public BookDto addBook(BookDto bookDto) {
         Book book = bookMapper.bookToEntity(bookDto);
         return bookMapper.bookToDto(bookRepository.save(book));
     }
 
+    @Override
     @Transactional
     public BookDto editBook(long id, BookDto bookDto) {
         Book fromDb = bookRepository.findById(id)
@@ -52,6 +56,7 @@ public class BookService {
         return bookMapper.bookToDto(fromDb);
     }
 
+    @Override
     @Transactional
     public void deleteBook(long id) {
         bookRepository.deleteById(id);
